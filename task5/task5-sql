@@ -1,0 +1,62 @@
+CREATE DATABASE payment_db;
+USE payment_db;
+CREATE TABLE users (
+    user_id INT PRIMARY KEY,
+    user_name VARCHAR(50),
+    balance DECIMAL(10,2)
+);
+
+CREATE TABLE merchants (
+    merchant_id INT PRIMARY KEY,
+    merchant_name VARCHAR(50),
+    balance DECIMAL(10,2)
+);
+INSERT INTO users VALUES (1, 'Tejaswani', 5000.00);
+INSERT INTO merchants VALUES (101, 'Amazon Store', 10000.00);
+
+START TRANSACTION;
+
+UPDATE users
+SET balance = balance - 1000
+WHERE user_id = 1 AND balance >= 1000;
+
+UPDATE merchants
+SET balance = balance + 1000
+WHERE merchant_id = 101;
+
+COMMIT;
+
+SELECT * FROM users;
+SELECT * FROM merchants;
+
+DELIMITER //
+
+CREATE PROCEDURE make_payment(
+    IN uid INT,
+    IN mid INT,
+    IN amount DECIMAL(10,2)
+)
+BEGIN
+    DECLARE user_balance DECIMAL(10,2);
+    START TRANSACTION;
+    SELECT balance INTO user_balance
+    FROM users
+    WHERE user_id = uid;
+    IF user_balance >= amount THEN
+        UPDATE users
+        SET balance = balance - amount
+        WHERE user_id = uid;
+        UPDATE merchants
+        SET balance = balance + amount
+        WHERE merchant_id = mid;
+        COMMIT;
+    ELSE
+        ROLLBACK;
+    END IF;
+END //
+
+DELIMITER ;
+
+CALL make_payment(1, 101, 500);
+SELECT 'Payment Successful' AS message;
+SELECT 'Insufficient Balance' AS message;

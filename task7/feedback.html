@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Feedback</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Customer Feedback</h2>
+
+    <form id="feedbackForm">
+
+        <label>Name:</label>
+        <input type="text" id="name" onkeyup="validateName()">
+        <span class="error" id="nameError"></span>
+
+        <label>Email:</label>
+        <input type="email" id="email" onkeyup="validateEmail()">
+        <span class="error" id="emailError"></span>
+
+        <label>Rating (1-5):</label>
+        <input type="number" id="rating" min="1" max="5">
+
+        <label>Comments:</label>
+        <textarea id="comments"></textarea>
+
+        <button type="button" id="submitBtn">
+            Submit (Double Click)
+        </button>
+
+        <p id="message"></p>
+
+    </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

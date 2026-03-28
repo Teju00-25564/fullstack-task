@@ -1,0 +1,49 @@
+CREATE TABLE accounts (
+    account_id INT PRIMARY KEY,
+    account_name VARCHAR(50),
+    balance DECIMAL(10,2)
+);
+
+CREATE TABLE account_logs (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    account_id INT,
+    action_type VARCHAR(20),
+    old_balance DECIMAL(10,2),
+    new_balance DECIMAL(10,2),
+    action_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+DELIMITER //
+CREATE TRIGGER after_account_insert
+AFTER INSERT ON accounts
+FOR EACH ROW
+BEGIN
+    INSERT INTO account_logs(account_id, action_type, old_balance, new_balance)
+    VALUES (NEW.account_id, 'INSERT', NULL, NEW.balance);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER after_account_update
+AFTER UPDATE ON accounts
+FOR EACH ROW
+BEGIN
+    INSERT INTO account_logs(account_id, action_type, old_balance, new_balance)
+    VALUES (NEW.account_id, 'UPDATE', OLD.balance, NEW.balance);
+END //
+DELIMITER ;
+INSERT INTO accounts VALUES (1, 'Tejaswani', 5000);
+
+UPDATE accounts
+SET balance = 6000
+WHERE account_id = 1;
+SELECT * FROM account_logs;
+
+CREATE VIEW daily_activity_report AS
+SELECT 
+    DATE(action_time) AS activity_date,
+    action_type,
+    COUNT(*) AS total_actions
+FROM account_logs
+GROUP BY DATE(action_time), action_type;
+SELECT * FROM daily_activity_report;

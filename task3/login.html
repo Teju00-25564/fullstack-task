@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Login</h2>
+
+    <div id="errorMsg" class="error"></div>
+
+    <input type="text" id="username" placeholder="Enter Username">
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="validateLogin()">Login</button>
+</div>
+
+<script>
+function validateLogin() {
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value.trim();
+    let error = document.getElementById("errorMsg");
+
+    error.innerHTML = "";
+
+    // Validation
+    if (username === "" || password === "") {
+        error.innerHTML = "All fields are required!";
+        return;
+    }
+
+    if (password.length < 6) {
+        error.innerHTML = "Password must be at least 6 characters!";
+        return;
+    }
+
+    // Send data to backend
+    fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert("Login Successful!");
+        } else {
+            error.innerHTML = data.message;
+        }
+    });
+}
+</script>
+
+</body>
+</html>
