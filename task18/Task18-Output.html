@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 18 Output</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --paper: #ffffff;
+      --ink: #172033;
+      --muted: #5f6b84;
+      --accent: #0f766e;
+      --line: #d9e0ee;
+      --soft: #edf7f6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 100%);
+      color: var(--ink);
+      padding: 32px;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 40px 44px;
+      box-shadow: 0 20px 50px rgba(23, 32, 51, 0.08);
+    }
+
+    h1, h2 {
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: 32px;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-top: 28px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    p {
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+
+    .meta, .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 16px 0 20px;
+    }
+
+    .badge {
+      background: var(--soft);
+      color: var(--accent);
+      border: 1px solid #bfe2de;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .card {
+      background: #fbfcfe;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin: 12px 0;
+    }
+
+    ul {
+      margin: 10px 0 0 20px;
+      padding: 0;
+    }
+
+    li {
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.95em;
+      background: #eef2f8;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>Task 18 Output</h1>
+    <p>Write unit test cases for microservices using a testing framework. Test service logic, REST controllers, and data handling independently to ensure reliability.</p>
+
+    <div class="badge-row">
+      <div class="badge">Spring Boot Microservices</div>
+      <div class="badge">JUnit 5</div>
+      <div class="badge">Mockito</div>
+      <div class="badge">MockMvc</div>
+      <div class="badge">Build Verified</div>
+    </div>
+
+    <h2>Project Created</h2>
+    <div class="card">
+      <p>A new standalone project was created under <code>Task18</code> so existing tasks remain untouched.</p>
+      <ul>
+        <li><code>task18-eureka-server</code></li>
+        <li><code>task18-identity-service</code></li>
+        <li><code>task18-order-service</code></li>
+        <li><code>task18-payment-service</code></li>
+      </ul>
+    </div>
+
+    <h2>Unit Test Coverage</h2>
+    <div class="card">
+      <ul>
+        <li><strong>REST controller tests:</strong> <code>UserControllerTest</code>, <code>OrderControllerTest</code>, <code>PaymentControllerTest</code></li>
+        <li><strong>Service logic tests:</strong> <code>OrderServiceTest</code></li>
+        <li><strong>Data handling and REST client tests:</strong> <code>UserClientTest</code>, <code>PaymentClientTest</code>, <code>AppconfigTest</code></li>
+        <li><strong>Infrastructure sanity test:</strong> <code>Task18EurekaServerApplicationTests</code></li>
+      </ul>
+    </div>
+
+    <h2>Implementation Notes</h2>
+    <div class="card">
+      <ul>
+        <li>The order microservice was structured with a dedicated <code>OrderService</code> so business logic can be tested independently from the controller.</li>
+        <li><code>MockMvc</code> was used for controller-only endpoint verification.</li>
+        <li><code>Mockito</code> was used to isolate service behavior and mock <code>RestTemplate</code>-based clients.</li>
+        <li>The Maven wrapper in Task 18 was adjusted to work in this local environment.</li>
+      </ul>
+    </div>
+
+    <h2>Build And Test Result</h2>
+    <div class="card">
+      <p>All Task 18 modules were tested and packaged successfully.</p>
+      <ul>
+        <li><code>task18-identity-service</code>: tests passed, jar created</li>
+        <li><code>task18-order-service</code>: 7 tests passed, jar created</li>
+        <li><code>task18-payment-service</code>: tests passed, jar created</li>
+        <li><code>task18-eureka-server</code>: tests passed, jar created</li>
+      </ul>
+    </div>
+
+    <h2>Generated Artifacts</h2>
+    <div class="card">
+      <ul>
+        <li><code>Task18\task18-identity-service\target\task18-identity-service-0.0.1-SNAPSHOT.jar</code></li>
+        <li><code>Task18\task18-order-service\target\task18-order-service-0.0.1-SNAPSHOT.jar</code></li>
+        <li><code>Task18\task18-payment-service\target\task18-payment-service-0.0.1-SNAPSHOT.jar</code></li>
+        <li><code>Task18\task18-eureka-server\target\task18-eureka-server-0.0.1-SNAPSHOT.jar</code></li>
+      </ul>
+    </div>
+
+    <p class="footer">Prepared from the completed Task 18 project on 2026-04-23.</p>
+  </main>
+</body>
+</html>
